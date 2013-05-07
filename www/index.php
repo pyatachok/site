@@ -2,19 +2,23 @@
 <?php
 // index.php
 
-error_reporting(E_ALL);
-ini_set('display_errors', true);
+
 
 // Загружаем и инициализируем глобальные библиотеки
-require_once './../inc/model.php';
-require_once './../inc/controllers.php';
+require_once './../inc/config.php';
+require_once ROOT_DIR . '/inc/model.php';
+require_once ROOT_DIR . '/controllers/company.php';
 
 // Внутренняя маршрутизация
-$uri = $_SERVER['REQUEST_URI'];
+$uri = $_SERVER['PHP_SELF'];
+
+
 if ($uri == '/index.php') {
     list_action();
-} elseif ($uri == '/index.php/show' && isset($_GET['id'])) {
-    show_action($_GET['id']);
+} elseif ($uri == '/index.php/company/list') {
+    company_list_action();
+} elseif ($uri == '/index.php/company/show' && isset($_GET['id'])) {
+    company_show_action($_GET['id']);
 } else {
     header('Status: 404 Not Found');
     echo '<html><body><h1>Page Not Found</h1></body></html>';
